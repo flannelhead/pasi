@@ -32,8 +32,10 @@ module.exports = function(grunt) {
                 message: 'Update build'
             },
             pages: {
-                remote: 'git@github.com:flannelhead/pasi.git',
-                branch: 'gh-pages'
+                options: {
+                    remote: 'git@github.com:flannelhead/pasi.git',
+                    branch: 'gh-pages'
+                }
             }
         }
     });
