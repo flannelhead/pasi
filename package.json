@@ -1,0 +1,23 @@
+{
+  "name": "pasi",
+  "version": "0.1.0",
+  "description": "A soon-to-be game",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sakari Kapanen",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-filerev": "^2.1.2",
+    "grunt-usemin": "^3.0.0"
+  }
+}
+
