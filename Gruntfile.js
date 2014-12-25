@@ -22,6 +22,19 @@ module.exports = function(grunt) {
         },
         usemin: {
             html: 'dist/index.html'
+        },
+
+        buildcontrol: {
+            options: {
+                dir: 'dist',
+                commit: true,
+                push: true,
+                message: 'Update build'
+            },
+            pages: {
+                remote: 'git@github.com:flannelhead/pasi.git',
+                branch: 'gh-pages'
+            }
         }
     });
 
@@ -32,6 +45,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-filerev');
     grunt.loadNpmTasks('grunt-usemin');
+    grunt.loadNpmTasks('grunt-build-control');
 
     grunt.registerTask('build', [
         'clean',
@@ -43,5 +57,7 @@ module.exports = function(grunt) {
         'filerev:assets',
         'usemin'
     ]);
+
+    grunt.registerTask('deploy', ['buildcontrol:pages']);
 };
 
