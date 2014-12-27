@@ -50,7 +50,6 @@ function update(world) {
     } else {
         world.pasi.vy += config.g;
         world.pasi.x += world.pasi.vx;
-        // console.log(world.pasi.x);
         if (world.pasi.x > config.width) {
             world.pasi.x = -world.pasi.sheet.frameWidth;
         } else if (world.pasi.x < -world.pasi.sheet.frameWidth) {
