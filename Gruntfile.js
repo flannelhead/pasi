@@ -60,6 +60,6 @@ module.exports = function(grunt) {
         'usemin'
     ]);
 
-    grunt.registerTask('deploy', ['buildcontrol:pages']);
+    grunt.registerTask('deploy', ['build', 'buildcontrol:pages']);
 };
 
