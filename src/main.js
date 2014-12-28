@@ -29,12 +29,12 @@ function main() {
         }
     };
 
-    startGame(document.getElementById('mainCanvas'),
-        config, draw, update, [
-        { name: 'keydown', fn: keydown },
-        { name: 'keyup', fn: keyup },
-        { name: 'deviceorientation', fn: orientation }
-    ], [], world);
+    startGame(document.getElementById('mainCanvas'), config, draw, update,
+        [
+            { name: 'keydown', fn: keydown },
+            { name: 'keyup', fn: keyup },
+            { name: 'deviceorientation', fn: orientation }
+        ], [], world);
 }
 
 function draw(ctx, world) {
