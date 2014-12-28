@@ -1,102 +1,85 @@
-var config = {
-    width: 180,
-    height: 240,
-    fps: 20,
-    pasiSpeed: 2,
-    pasiJumpSpeed: 12,
-    pasiLeapTicks: 4,
-    g: 1
-};
-
 window.addEventListener('load', main);
 
-function main() {
-    var pasiSheet = new SpriteSheet(document.getElementById('pasi'), 4);
-    var world = {
-        pasi: {
-            animIndex: 0,
-            animLength: 2,
-            sheet: pasiSheet,
-            tick: 0,
-            animTicks: 5,
-            vx: 0,
-            vy: 0,
-            pose: 1,
-            x: 0,
-            y: config.height - pasiSheet.spriteHeight,
-            leaping: false,
-            leapTick: 0
-        }
-    };
+function initialWorld(width, height) {
+    var sheet = new SpriteSheet(document.getElementById('pasi'), 4);
+    return {
+        width: width,
+        height: height,
+        g: 1,
 
+        pasi: new Pasi({
+            spriteSheet: sheet,
+            x: 0,
+            y: height - sheet.spriteHeight,
+            nLeapTicks: 4,
+            speed: 4,
+            jumpSpeed: 12
+        })
+    };
+}
+
+function main() {
+    var config = {
+        width: 180,
+        height: 240,
+        fps: 20,
+        g: 1
+    };
     startGame(document.getElementById('mainCanvas'), config, draw, update,
         [
             { name: 'keydown', fn: keydown },
             { name: 'keyup', fn: keyup },
             { name: 'deviceorientation', fn: orientation }
-        ], [], world);
+        ], [], initialWorld(config.width, config.height));
 }
 
 function draw(ctx, world) {
-    ctx.clearRect(0, 0, config.width, config.height);
-    var pasiAnimOffset = world.pasi.pose === -1 ? 2 : 0;
-    world.pasi.sheet.draw(ctx, world.pasi.x, world.pasi.y,
-        world.pasi.animIndex + pasiAnimOffset);
+    world.pasi.draw(ctx);
+    // ctx.clearRect(0, 0, config.width, config.height);
+    // var pasiAnimOffset = world.pasi.pose === -1 ? 2 : 0;
+    // world.pasi.sheet.draw(ctx, world.pasi.x, world.pasi.y,
+    //     world.pasi.animIndex + pasiAnimOffset);
 }
 
 function update(world) {
-    if (world.pasi.leaping) {
-        tickPasi(world.pasi);
-    } else {
-        world.pasi.vy += config.g;
-        world.pasi.x += world.pasi.vx;
-        if (world.pasi.x > config.width) {
-            world.pasi.x = -world.pasi.sheet.spriteWidth;
-        } else if (world.pasi.x < -world.pasi.sheet.spriteWidth) {
-            world.pasi.x = config.width;
-        }
-        world.pasi.y += world.pasi.vy;
-        if (world.pasi.y >= config.height - world.pasi.sheet.spriteHeight) {
-            world.pasi.y = config.height - world.pasi.sheet.spriteHeight;
-            startLeaping(world.pasi);
-        }
-    }
-}
-
-function startLeaping(pasi) {
-    pasi.leaping = true;
-    pasi.leapTick = 0;
-    pasi.animIndex = 1;
-}
-
-function tickPasi(pasi) {
-    if (++pasi.leapTick === config.pasiLeapTicks) {
-        pasi.leaping = false;
-        pasi.animIndex = 0;
-        pasi.vy = -config.pasiJumpSpeed;
-    }
+    // if (world.pasi.leaping) {
+    //     tickPasi(world.pasi);
+    // } else {
+    //     world.pasi.vy += config.g;
+    //     world.pasi.x += world.pasi.vx;
+    //     if (world.pasi.x > config.width) {
+    //         world.pasi.x = -world.pasi.sheet.spriteWidth;
+    //     } else if (world.pasi.x < -world.pasi.sheet.spriteWidth) {
+    //         world.pasi.x = config.width;
+    //     }
+    //     world.pasi.y += world.pasi.vy;
+    //     if (world.pasi.y >= config.height - world.pasi.sheet.spriteHeight) {
+    //         world.pasi.y = config.height - world.pasi.sheet.spriteHeight;
+    //         startLeaping(world.pasi);
+    //     }
+    // }
 }
 
 function keydown(e, world) {
-    if (e.keyCode === 39) {
-        world.pasi.vx = config.pasiSpeed;
-        world.pasi.pose = 1;
-    } else if (e.keyCode === 37) {
-        world.pasi.vx = -config.pasiSpeed;
-        world.pasi.pose = -1;
-    }
+    // if (e.keyCode === 39) {
+    //     world.pasi.vx = config.pasiSpeed;
+    //     world.pasi.pose = 1;
+    // } else if (e.keyCode === 37) {
+    //     world.pasi.vx = -config.pasiSpeed;
+    //     world.pasi.pose = -1;
+    // }
 }
 
 function keyup(e, world) {
-    if (e.keyCode === 39 && world.pasi.vx > 0) {
-        world.pasi.vx = 0;
-    } else if (e.keyCode === 37 && world.pasi.vx < 0) {
-        world.pasi.vx = 0;
-    }
+    // if (e.keyCode === 39 && world.pasi.vx > 0) {
+    //     world.pasi.vx = 0;
+    // } else if (e.keyCode === 37 && world.pasi.vx < 0) {
+    //     world.pasi.vx = 0;
+    // }
 }
 
 function orientation(e, world) {
-    world.pasi.vx = e.gamma * config.pasiSpeed / 10;
-    world.pasi.pose = e.gamma > 0 ? 1 : -1;
+    // world.pasi.vx = e.gamma * config.pasiSpeed / 10;
+    // world.pasi.pose = e.gamma > 0 ? 1 : -1;
 }
 
