@@ -29,13 +29,12 @@ function main() {
         }
     };
 
-    var updateScaling = game(document.getElementById('mainCanvas'),
+    game(document.getElementById('mainCanvas'),
         config, draw, update, [
         { name: 'keydown', fn: keydown },
         { name: 'keyup', fn: keyup },
         { name: 'deviceorientation', fn: orientation }
     ], [], world);
-    window.addEventListener('resize', updateScaling);
 }
 
 function draw(ctx, world) {
