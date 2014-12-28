@@ -1,5 +1,5 @@
-function game(canvas, config, draw, update, globalHandlers, elementHandlers,
-    initialWorld) {
+function startGame(canvas, config, draw, update, globalHandlers,
+    elementHandlers, initialWorld) {
     var dt = 1000 / config.fps;
     var ctx = canvas.getContext('2d'),
         container = canvas.parentNode;

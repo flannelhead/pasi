@@ -29,7 +29,7 @@ function main() {
         }
     };
 
-    game(document.getElementById('mainCanvas'),
+    startGame(document.getElementById('mainCanvas'),
         config, draw, update, [
         { name: 'keydown', fn: keydown },
         { name: 'keyup', fn: keyup },
