@@ -1,9 +1,8 @@
-function game(container, config, draw, update, globalHandlers, elementHandlers,
+function game(canvas, config, draw, update, globalHandlers, elementHandlers,
     initialWorld) {
-    var dt = 1000 / config.fps,
-        canvas = document.createElement('canvas');
-    container.appendChild(canvas);
-    var ctx = canvas.getContext('2d');
+    var dt = 1000 / config.fps;
+    var ctx = canvas.getContext('2d'),
+        container = canvas.parentNode;
 
     function setupCanvas() {
         var w = container.offsetWidth,

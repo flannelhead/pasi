@@ -29,7 +29,7 @@ function main() {
         }
     };
 
-    var updateScaling = game(document.getElementsByTagName('body')[0],
+    var updateScaling = game(document.getElementById('mainCanvas'),
         config, draw, update, [
         { name: 'keydown', fn: keydown },
         { name: 'keyup', fn: keyup },
