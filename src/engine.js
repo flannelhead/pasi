@@ -53,7 +53,6 @@ function startGame(canvas, config, draw, update, globalHandlers,
             then = now - (delta % dt);
         }
     }
-
     window.requestAnimationFrame(loop);
 }
 
