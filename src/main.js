@@ -12,7 +12,6 @@ window.addEventListener('load', main);
 
 function main() {
     var pasiSheet = new SpriteSheet(document.getElementById('pasi'), 4);
-    console.log(pasiSheet);
     var world = {
         pasi: {
             animIndex: 0,
