@@ -11,7 +11,8 @@ var config = {
 window.addEventListener('load', main);
 
 function main() {
-    var pasiSheet = spriteSheet(document.getElementById('pasi'), 4);
+    var pasiSheet = new SpriteSheet(document.getElementById('pasi'), 4);
+    console.log(pasiSheet);
     var world = {
         pasi: {
             animIndex: 0,
@@ -23,7 +24,7 @@ function main() {
             vy: 0,
             pose: 1,
             x: 0,
-            y: config.height - pasiSheet.frameHeight,
+            y: config.height - pasiSheet.spriteHeight,
             leaping: false,
             leapTick: 0
         }
@@ -41,7 +42,8 @@ function main() {
 function draw(ctx, world) {
     ctx.clearRect(0, 0, config.width, config.height);
     var pasiAnimOffset = world.pasi.pose === -1 ? 2 : 0;
-    drawSpriteObject(ctx, world.pasi, pasiAnimOffset);
+    world.pasi.sheet.draw(ctx, world.pasi.x, world.pasi.y,
+        world.pasi.animIndex + pasiAnimOffset);
 }
 
 function update(world) {
@@ -51,13 +53,13 @@ function update(world) {
         world.pasi.vy += config.g;
         world.pasi.x += world.pasi.vx;
         if (world.pasi.x > config.width) {
-            world.pasi.x = -world.pasi.sheet.frameWidth;
-        } else if (world.pasi.x < -world.pasi.sheet.frameWidth) {
+            world.pasi.x = -world.pasi.sheet.spriteWidth;
+        } else if (world.pasi.x < -world.pasi.sheet.spriteWidth) {
             world.pasi.x = config.width;
         }
         world.pasi.y += world.pasi.vy;
-        if (world.pasi.y >= config.height - world.pasi.sheet.frameHeight) {
-            world.pasi.y = config.height - world.pasi.sheet.frameHeight;
+        if (world.pasi.y >= config.height - world.pasi.sheet.spriteHeight) {
+            world.pasi.y = config.height - world.pasi.sheet.spriteHeight;
             startLeaping(world.pasi);
         }
     }
