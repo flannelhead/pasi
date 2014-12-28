@@ -1,8 +1,5 @@
 function game(container, config, draw, update, globalHandlers, elementHandlers,
     initialWorld) {
-    container.style.display = 'flex';
-    container.style.justifyContent = 'center';
-    container.style.alignItems = 'center';
     var dt = 1000 / config.fps,
         canvas = document.createElement('canvas');
     container.appendChild(canvas);
