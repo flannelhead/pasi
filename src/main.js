@@ -18,7 +18,9 @@ function initialWorld(width, height) {
             speed: 4,
             jumpSpeed: 12,
             gammaFactor: 1
-        })
+        }),
+
+        platformGen: new PlatformGenerator()
     };
 }
 
