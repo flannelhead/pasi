@@ -16,7 +16,8 @@ function initialWorld(width, height) {
             y: height - sheet.spriteHeight,
             nLeapTicks: 4,
             speed: 4,
-            jumpSpeed: 12
+            jumpSpeed: 12,
+            gammaFactor: 1
         })
     };
 }
@@ -37,6 +38,7 @@ function main() {
 }
 
 function draw(ctx, world) {
+    ctx.clearRect(0, 0, world.width, world.height);
     world.pasi.draw(ctx);
     // ctx.clearRect(0, 0, config.width, config.height);
     // var pasiAnimOffset = world.pasi.pose === -1 ? 2 : 0;
@@ -52,6 +54,12 @@ function update(world) {
     } else {
         world.pasi.vx = world.pasi.gammaFactor * world.gamma;
     }
+
+    world.pasi.x += world.pasi.vx;
+    world.pasi.y += world.pasi.vy;
+
+    world.pasi.update();
+    // world.pasi.vy += world.g;
     // if (world.pasi.leaping) {
     //     tickPasi(world.pasi);
     // } else {
