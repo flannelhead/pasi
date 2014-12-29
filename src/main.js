@@ -3,6 +3,9 @@ window.addEventListener('load', main);
 function initialWorld(width, height) {
     var sheet = new SpriteSheet(document.getElementById('pasi'), 4);
     return {
+        keys: {left: false, right: false},
+        gamma: 0,
+
         width: width,
         height: height,
         g: 1,
@@ -42,6 +45,13 @@ function draw(ctx, world) {
 }
 
 function update(world) {
+    if (world.keys.right) {
+        world.pasi.vx = world.pasi.speed;
+    } else if (world.keys.left) {
+        world.pasi.vx = -world.pasi.speed;
+    } else {
+        world.pasi.vx = world.pasi.gammaFactor * world.gamma;
+    }
     // if (world.pasi.leaping) {
     //     tickPasi(world.pasi);
     // } else {
@@ -61,6 +71,11 @@ function update(world) {
 }
 
 function keydown(e, world) {
+    if (e.keyCode === 39) {
+        world.keys.right = true;
+    } else if (e.keyCode === 37) {
+        world.keys.left = true;
+    }
     // if (e.keyCode === 39) {
     //     world.pasi.vx = config.pasiSpeed;
     //     world.pasi.pose = 1;
@@ -71,6 +86,11 @@ function keydown(e, world) {
 }
 
 function keyup(e, world) {
+    if (e.keyCode === 39) {
+        world.keys.right = false;
+    } else if (e.keyCode === 37) {
+        world.keys.left = false;
+    }
     // if (e.keyCode === 39 && world.pasi.vx > 0) {
     //     world.pasi.vx = 0;
     // } else if (e.keyCode === 37 && world.pasi.vx < 0) {
@@ -79,6 +99,7 @@ function keyup(e, world) {
 }
 
 function orientation(e, world) {
+    world.gamma = e.gamma;
     // world.pasi.vx = e.gamma * config.pasiSpeed / 10;
     // world.pasi.pose = e.gamma > 0 ? 1 : -1;
 }
