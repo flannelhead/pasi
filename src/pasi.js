@@ -1,7 +1,10 @@
 function Pasi(params) {
     this.sheet = params.spriteSheet;
+    this.width = this.sheet.spriteWidth;
+    this.height = this.sheet.spriteHeight;
     this.x = params.x;
     this.y = params.y;
+    this.xOffset = -this.width / 2 - 4;
     this.speed = params.speed;
     this.nLeapTicks = params.nLeapTicks;
     this.gammaFactor = params.gammaFactor;
@@ -14,7 +17,8 @@ function Pasi(params) {
 }
 
 Pasi.prototype.draw = function(ctx) {
-    this.sheet.drawSprite(ctx, this.x, this.y, this.spriteIndex);
+    this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y,
+        this.spriteIndex);
 };
 
 Pasi.prototype.update = function(ctx) {
