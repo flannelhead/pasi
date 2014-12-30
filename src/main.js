@@ -62,6 +62,7 @@ function update(world) {
     world.pasi.x += world.pasi.vx;
     world.pasi.y += world.pasi.vy;
 
+    world.pasi.wrap(world.width);
     world.pasi.update();
 
     world.platformGenerator.generatePlatforms(world.height, 0);

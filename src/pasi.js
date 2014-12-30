@@ -27,3 +27,12 @@ Pasi.prototype.update = function(ctx) {
     this.spriteIndex = this.pose === 1 ? 0 : 2;
 };
 
+Pasi.prototype.wrap = function(width) {
+    var halfWidth = this.width / 2;
+    if (this.x + halfWidth < 0) {
+        this.x = width + halfWidth;
+    } else if (this.x - halfWidth > width) {
+        this.x = -halfWidth;
+    }
+};
+
