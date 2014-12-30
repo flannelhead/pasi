@@ -48,10 +48,6 @@ function draw(ctx, world) {
     });
 
     world.pasi.draw(ctx);
-    // ctx.clearRect(0, 0, config.width, config.height);
-    // var pasiAnimOffset = world.pasi.pose === -1 ? 2 : 0;
-    // world.pasi.sheet.draw(ctx, world.pasi.x, world.pasi.y,
-    //     world.pasi.animIndex + pasiAnimOffset);
 }
 
 function update(world) {
@@ -69,23 +65,6 @@ function update(world) {
     world.pasi.update();
 
     world.platformGenerator.generatePlatforms(world.height, 0);
-    // world.pasi.vy += world.g;
-    // if (world.pasi.leaping) {
-    //     tickPasi(world.pasi);
-    // } else {
-    //     world.pasi.vy += config.g;
-    //     world.pasi.x += world.pasi.vx;
-    //     if (world.pasi.x > config.width) {
-    //         world.pasi.x = -world.pasi.sheet.spriteWidth;
-    //     } else if (world.pasi.x < -world.pasi.sheet.spriteWidth) {
-    //         world.pasi.x = config.width;
-    //     }
-    //     world.pasi.y += world.pasi.vy;
-    //     if (world.pasi.y >= config.height - world.pasi.sheet.spriteHeight) {
-    //         world.pasi.y = config.height - world.pasi.sheet.spriteHeight;
-    //         startLeaping(world.pasi);
-    //     }
-    // }
 }
 
 function keydown(e, world) {
@@ -94,13 +73,6 @@ function keydown(e, world) {
     } else if (e.keyCode === 37) {
         world.keys.left = true;
     }
-    // if (e.keyCode === 39) {
-    //     world.pasi.vx = config.pasiSpeed;
-    //     world.pasi.pose = 1;
-    // } else if (e.keyCode === 37) {
-    //     world.pasi.vx = -config.pasiSpeed;
-    //     world.pasi.pose = -1;
-    // }
 }
 
 function keyup(e, world) {
@@ -109,16 +81,9 @@ function keyup(e, world) {
     } else if (e.keyCode === 37) {
         world.keys.left = false;
     }
-    // if (e.keyCode === 39 && world.pasi.vx > 0) {
-    //     world.pasi.vx = 0;
-    // } else if (e.keyCode === 37 && world.pasi.vx < 0) {
-    //     world.pasi.vx = 0;
-    // }
 }
 
 function orientation(e, world) {
     world.gamma = e.gamma;
-    // world.pasi.vx = e.gamma * config.pasiSpeed / 10;
-    // world.pasi.pose = e.gamma > 0 ? 1 : -1;
 }
 
