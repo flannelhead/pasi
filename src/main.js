@@ -12,7 +12,7 @@ function initialWorld(width, height) {
 
         pasi: new Pasi({
             spriteSheet: sheet,
-            x: 0,
+            x: width / 2,
             y: height - sheet.spriteHeight,
             nLeapTicks: 4,
             speed: 4,
@@ -20,7 +20,7 @@ function initialWorld(width, height) {
             gammaFactor: 1
         }),
 
-        platformGen: new PlatformGenerator()
+        platformGenerator: new PlatformGenerator(width, width / 2, height)
     };
 }
 
@@ -31,6 +31,7 @@ function main() {
         fps: 20,
         g: 1
     };
+
     startGame(document.getElementById('mainCanvas'), config, draw, update,
         [
             { name: 'keydown', fn: keydown },
@@ -41,6 +42,11 @@ function main() {
 
 function draw(ctx, world) {
     ctx.clearRect(0, 0, world.width, world.height);
+
+    world.platformGenerator.platforms.forEach(function(platform) {
+        platform.draw(ctx);
+    });
+
     world.pasi.draw(ctx);
     // ctx.clearRect(0, 0, config.width, config.height);
     // var pasiAnimOffset = world.pasi.pose === -1 ? 2 : 0;
@@ -61,6 +67,8 @@ function update(world) {
     world.pasi.y += world.pasi.vy;
 
     world.pasi.update();
+
+    world.platformGenerator.generatePlatforms(world.height, 0);
     // world.pasi.vy += world.g;
     // if (world.pasi.leaping) {
     //     tickPasi(world.pasi);
