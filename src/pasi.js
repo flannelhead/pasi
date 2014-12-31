@@ -23,7 +23,7 @@ Pasi.prototype.draw = function(ctx) {
         this.spriteIndex);
 };
 
-Pasi.prototype.update = function(g) {
+Pasi.prototype.update = function() {
     if (this.vx < 0) this.pose = -1;
     else if (this.vx > 0) this.pose = 1;
     this.spriteIndex = this.pose === 1 ? 0 : 2;
