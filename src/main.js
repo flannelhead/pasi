@@ -28,8 +28,7 @@ function main() {
     var config = {
         width: 180,
         height: 240,
-        fps: 20,
-        g: 1
+        fps: 20
     };
 
     startGame(document.getElementById('mainCanvas'), config, draw, update,
@@ -61,6 +60,7 @@ function update(world) {
 
     world.pasi.x += world.pasi.vx;
     world.pasi.y += world.pasi.vy;
+    world.pasi.vy += world.g;
 
     world.pasi.wrap(world.width);
     world.pasi.update();
