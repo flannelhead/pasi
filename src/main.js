@@ -31,12 +31,15 @@ function main() {
         fps: 20
     };
 
+    var initWorld = initialWorld(config.width, config.height);
+    initWorld.pasi.vy = -initWorld.pasi.jumpSpeed;
+
     startGame(document.getElementById('mainCanvas'), config, draw, update,
         [
             { name: 'keydown', fn: keydown },
             { name: 'keyup', fn: keyup },
             { name: 'deviceorientation', fn: orientation }
-        ], [], initialWorld(config.width, config.height));
+        ], [], initWorld);
 }
 
 function draw(ctx, world) {
