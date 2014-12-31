@@ -21,7 +21,8 @@ PlatformGenerator.prototype.generatePlatforms = function(yLower, yUpper) {
             dx = toss * (this.xSpaceMin + this.xSpaceRandom * Math.random()),
             dy = this.ySpaceMin + this.ySpaceRandom * Math.random();
         var x = Math.min(Math.max(highestPlatform.x + dx, 0), this.width);
-        highestPlatform = new Platform(x, highestPlatform.y - dy);
+        highestPlatform = new Platform(Math.round(x),
+            Math.round(highestPlatform.y - dy));
         newPlatforms.push(highestPlatform);
     }
 
