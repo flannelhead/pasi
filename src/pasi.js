@@ -29,15 +29,12 @@ Pasi.prototype.update = function(g) {
 
     if (this.leaping) {
         ++this.spriteIndex;
-
         if (++this.leapCounter === this.nLeapTicks) {
             this.leaping = false;
-            this.vy = -this.jumpSpeed;
         }
-    } else {
-        this.x += this.vx;
-        this.y += this.vy;
     }
+    this.x += this.vx;
+    this.y += this.vy;
 };
 
 Pasi.prototype.wrap = function(width) {
@@ -65,6 +62,7 @@ Pasi.prototype.leap = function() {
     if (!this.leaping) {
         this.leaping = true;
         this.leapCounter = 0;
+        this.vy = -this.jumpSpeed;
     }
 };
 
