@@ -14,7 +14,7 @@ function initialWorld(width, height) {
             spriteSheet: sheet,
             x: width / 2,
             y: height,
-            nLeapTicks: 2,
+            nLeapTicks: 3,
             speed: 4,
             jumpSpeed: 13,
             gammaFactor: 0.4
