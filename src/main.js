@@ -17,7 +17,7 @@ function initialWorld(width, height) {
             nLeapTicks: 2,
             speed: 4,
             jumpSpeed: 12,
-            gammaFactor: 1
+            gammaFactor: 0.4
         }),
 
         platformGenerator: new PlatformGenerator(width, width / 2, height - 2)
