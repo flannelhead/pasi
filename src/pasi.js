@@ -7,6 +7,7 @@ function Pasi(params) {
     this.nLeapTicks = params.nLeapTicks;
     this.gammaFactor = params.gammaFactor;
 
+    this.yPrev = this.y;
     this.vx = 0;
     this.vy = 0;
     this.spriteIndex = 0;
@@ -34,6 +35,7 @@ Pasi.prototype.update = function(g) {
         }
     }
 
+    this.yPrev = this.y;
     this.x += this.vx;
     this.y += this.vy;
 };
@@ -47,11 +49,11 @@ Pasi.prototype.wrap = function(width) {
     }
 };
 
-Pasi.prototype.getCollidingPlatform = function(yPrev, platforms) {
+Pasi.prototype.getCollidingPlatform = function(platforms) {
     var platform;
     for (var i = 0; i < platforms.length; i++) {
         platform = platforms[i];
-        if (yPrev <= platform.y && this.y >= platform.y && this.vy > 0 &&
+        if (this.yPrev <= platform.y && this.y >= platform.y && this.vy > 0 &&
             Math.abs(this.x - platform.x) < (platform.width + this.width) / 2) {
             return platform;
         }

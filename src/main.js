@@ -64,12 +64,11 @@ function update(world) {
     }
     world.pasi.vy += world.g;
 
-    var yPrev = world.pasi.y;
     world.pasi.update(world.g);
     world.pasi.wrap(world.width);
 
-    var collidingPlatform = world.pasi.getCollidingPlatform(yPrev,
-        world.platformGenerator.platforms);
+    var collidingPlatform =
+        world.pasi.getCollidingPlatform(world.platformGenerator.platforms);
     if (collidingPlatform !== null) {
         world.pasi.y = collidingPlatform.y;
         world.pasi.leap();
