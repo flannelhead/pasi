@@ -20,7 +20,7 @@ function initialWorld(width, height) {
             gammaFactor: 1
         }),
 
-        platformGenerator: new PlatformGenerator(width, width / 2, height)
+        platformGenerator: new PlatformGenerator(width, width / 2, height - 2)
     };
 }
 
