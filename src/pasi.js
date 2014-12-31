@@ -33,6 +33,7 @@ Pasi.prototype.update = function(g) {
             this.leaping = false;
         }
     }
+
     this.x += this.vx;
     this.y += this.vy;
 };

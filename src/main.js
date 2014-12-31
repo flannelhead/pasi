@@ -16,7 +16,7 @@ function initialWorld(width, height) {
             y: height,
             nLeapTicks: 2,
             speed: 4,
-            jumpSpeed: 12,
+            jumpSpeed: 13,
             gammaFactor: 0.4
         }),
 
