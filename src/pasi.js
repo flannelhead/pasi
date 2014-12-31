@@ -29,7 +29,7 @@ Pasi.prototype.update = function(g) {
 
     if (this.leaping) {
         ++this.spriteIndex;
-        console.log(this.leapCounter);
+
         if (++this.leapCounter === this.nLeapTicks) {
             this.leaping = false;
             this.vy = -this.jumpSpeed;
