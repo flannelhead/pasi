@@ -26,8 +26,8 @@ function initialWorld(width, height) {
 
 function main() {
     var config = {
-        width: 180,
-        height: 240,
+        width: 200,
+        height: 300,
         fps: 20
     };
 
