@@ -11,8 +11,8 @@ function Pasi(params) {
     this.spriteIndex = 0;
     this.pose = 1;  // 1 = right, -1 = left
     this.leaping = false;
-    this.xOffset = -this.width / 2 - 4;
     this.width = this.sheet.spriteWidth;
+    this.xOffset = -this.width / 2 - 4;
     this.height = this.sheet.spriteHeight;
 }
 
