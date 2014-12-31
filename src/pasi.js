@@ -14,6 +14,9 @@ function Pasi(params) {
     this.pose = 1;  // 1 = right, -1 = left
     this.leaping = false;
     this.width = this.sheet.spriteWidth;
+    this.baseWidth = 13;
+    this.baseDxRight = 3;
+    this.baseDxLeft = -7;
     this.xOffset = -this.width / 2 - 4;
     this.height = this.sheet.spriteHeight;
 }
@@ -51,10 +54,13 @@ Pasi.prototype.wrap = function(width) {
 
 Pasi.prototype.getCollidingPlatform = function(platforms) {
     var platform;
+    var baseX = this.pose === 1 ? this.x + this.baseDxRight :
+        this.x + this.baseDxLeft;
     for (var i = 0; i < platforms.length; i++) {
         platform = platforms[i];
         if (this.yPrev <= platform.y && this.y >= platform.y && this.vy > 0 &&
-            Math.abs(this.x - platform.x) < (platform.width + this.width) / 2) {
+            Math.abs(baseX - platform.x) <
+            (platform.width + this.baseWidth) / 2) {
             return platform;
         }
     }
