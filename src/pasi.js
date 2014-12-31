@@ -37,7 +37,6 @@ Pasi.prototype.update = function(g) {
     } else {
         this.x += this.vx;
         this.y += this.vy;
-        this.vy += g;
     }
 };
 

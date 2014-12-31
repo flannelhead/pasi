@@ -62,6 +62,7 @@ function update(world) {
     } else {
         world.pasi.vx = world.pasi.gammaFactor * world.gamma;
     }
+    world.pasi.vy += world.g;
 
     var yPrev = world.pasi.y;
     world.pasi.update(world.g);
