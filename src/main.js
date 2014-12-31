@@ -53,6 +53,8 @@ function draw(ctx, world) {
 }
 
 function update(world) {
+    world.platformGenerator.generatePlatforms(world.height, 0);
+
     if (world.keys.right) {
         world.pasi.vx = world.pasi.speed;
     } else if (world.keys.left) {
@@ -61,6 +63,7 @@ function update(world) {
         world.pasi.vx = world.pasi.gammaFactor * world.gamma;
     }
 
+    var yPrev = world.pasi.y;
     world.pasi.x += world.pasi.vx;
     world.pasi.y += world.pasi.vy;
     world.pasi.vy += world.g;
@@ -68,7 +71,12 @@ function update(world) {
     world.pasi.wrap(world.width);
     world.pasi.update();
 
-    world.platformGenerator.generatePlatforms(world.height, 0);
+    var collidingPlatform = world.pasi.getCollidingPlatform(yPrev,
+        world.platformGenerator.platforms);
+    if (collidingPlatform !== null) {
+        console.log('Collision at (' + collidingPlatform.x + ', ' +
+            collidingPlatform.y + ')');
+    }
 }
 
 function keydown(e, world) {

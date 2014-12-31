@@ -37,3 +37,15 @@ Pasi.prototype.wrap = function(width) {
     }
 };
 
+Pasi.prototype.getCollidingPlatform = function(yPrev, platforms) {
+    var platform;
+    for (var i = 0; i < platforms.length; i++) {
+        platform = platforms[i];
+        if (yPrev <= platform.y && this.y >= platform.y &&
+            Math.abs(this.x - platform.x) < (platform.width + this.width) / 2) {
+            return platform;
+        }
+    }
+    return null;
+};
+
