@@ -18,14 +18,27 @@ function Pasi(params) {
 }
 
 Pasi.prototype.draw = function(ctx) {
-    this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y,
+    this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y - this.height,
         this.spriteIndex);
 };
 
-Pasi.prototype.update = function(ctx) {
+Pasi.prototype.update = function(g) {
     if (this.vx < 0) this.pose = -1;
     else if (this.vx > 0) this.pose = 1;
     this.spriteIndex = this.pose === 1 ? 0 : 2;
+
+    if (this.leaping) {
+        ++this.spriteIndex;
+        console.log(this.leapCounter);
+        if (++this.leapCounter === this.nLeapTicks) {
+            this.leaping = false;
+            this.vy = -this.jumpSpeed;
+        }
+    } else {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += g;
+    }
 };
 
 Pasi.prototype.wrap = function(width) {
@@ -41,11 +54,18 @@ Pasi.prototype.getCollidingPlatform = function(yPrev, platforms) {
     var platform;
     for (var i = 0; i < platforms.length; i++) {
         platform = platforms[i];
-        if (yPrev <= platform.y && this.y >= platform.y &&
+        if (yPrev <= platform.y && this.y >= platform.y && this.vy > 0 &&
             Math.abs(this.x - platform.x) < (platform.width + this.width) / 2) {
             return platform;
         }
     }
     return null;
+};
+
+Pasi.prototype.leap = function() {
+    if (!this.leaping) {
+        this.leaping = true;
+        this.leapCounter = 0;
+    }
 };
 

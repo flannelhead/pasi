@@ -13,8 +13,8 @@ function initialWorld(width, height) {
         pasi: new Pasi({
             spriteSheet: sheet,
             x: width / 2,
-            y: height - sheet.spriteHeight,
-            nLeapTicks: 4,
+            y: height,
+            nLeapTicks: 2,
             speed: 4,
             jumpSpeed: 12,
             gammaFactor: 1
@@ -64,18 +64,14 @@ function update(world) {
     }
 
     var yPrev = world.pasi.y;
-    world.pasi.x += world.pasi.vx;
-    world.pasi.y += world.pasi.vy;
-    world.pasi.vy += world.g;
-
+    world.pasi.update(world.g);
     world.pasi.wrap(world.width);
-    world.pasi.update();
 
     var collidingPlatform = world.pasi.getCollidingPlatform(yPrev,
         world.platformGenerator.platforms);
     if (collidingPlatform !== null) {
-        console.log('Collision at (' + collidingPlatform.x + ', ' +
-            collidingPlatform.y + ')');
+        world.pasi.y = collidingPlatform.y;
+        world.pasi.leap();
     }
 }
 
