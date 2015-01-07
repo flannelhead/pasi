@@ -2,9 +2,9 @@ function PlatformGenerator(width, xFirst, yFirst) {
     this.width = width;
 
     this.xSpaceMin = 30;
-    this.xSpaceRandom = 5;
-    this.ySpaceMin = 60;
-    this.ySpaceRandom = 10;
+    this.xSpaceRandom = 30;
+    this.ySpaceMin = 15;
+    this.ySpaceRandom = 60;
 
     this.platforms = [new Platform(xFirst, yFirst)];
 }
