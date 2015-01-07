@@ -13,14 +13,14 @@ function initialWorld(width, height) {
         pasi: new Pasi({
             spriteSheet: sheet,
             x: width / 2,
-            y: height,
+            y: 0,
             nLeapTicks: 3,
             speed: 4,
             jumpSpeed: 13,
             gammaFactor: 0.4
         }),
 
-        platformGenerator: new PlatformGenerator(width, width / 2, height - 2)
+        platformGenerator: new PlatformGenerator(width, width / 2, -2)
     };
 }
 
@@ -45,15 +45,20 @@ function main() {
 function draw(ctx, world) {
     ctx.clearRect(0, 0, world.width, world.height);
 
+    ctx.save();
+    ctx.translate(0, world.height);
+
     world.platformGenerator.platforms.forEach(function(platform) {
         platform.draw(ctx);
     });
 
     world.pasi.draw(ctx);
+
+    ctx.restore();
 }
 
 function update(world) {
-    world.platformGenerator.generatePlatforms(world.height, 0);
+    world.platformGenerator.generatePlatforms(0, -world.height);
 
     if (world.keys.right) {
         world.pasi.vx = world.pasi.speed;
