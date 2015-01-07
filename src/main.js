@@ -2,7 +2,7 @@ window.addEventListener('load', main);
 
 function initialWorld(width, height) {
     var sheet = new SpriteSheet(document.getElementById('pasi'), 4);
-    return {
+    var world = {
         keys: {left: false, right: false},
         gamma: 0,
 
@@ -10,21 +10,31 @@ function initialWorld(width, height) {
         height: height,
         g: 1,
 
-        pasi: new Pasi({
-            spriteSheet: sheet,
-            x: width / 2,
-            y: 0,
-            nLeapTicks: 3,
-            speed: 4,
-            jumpSpeed: 13,
-            gammaFactor: 0.4
-        }),
+        pasiSheet: sheet,
 
-        yCamera: 0,
         cameraRatio: 0.3,
 
-        platformGenerator: new PlatformGenerator(width, width / 2, -2)
     };
+
+    restart(world);
+    return world;
+}
+
+function restart(world) {
+    world.pasi = new Pasi({
+        spriteSheet: world.pasiSheet,
+        x: world.width / 2,
+        y: 0,
+        nLeapTicks: 3,
+        speed: 4,
+        jumpSpeed: 13,
+        gammaFactor: 0.4
+    });
+    // Give Pasi an initial kick.
+    world.pasi.vy = -world.pasi.jumpSpeed;
+    world.yCamera = 0;
+    world.platformGenerator = new PlatformGenerator(world.width,
+        world.width / 2, -2);
 }
 
 function main() {
@@ -35,13 +45,13 @@ function main() {
     };
 
     var initWorld = initialWorld(config.width, config.height);
-    initWorld.pasi.vy = -initWorld.pasi.jumpSpeed;
 
     startGame(document.getElementById('mainCanvas'), config, draw, update,
         [
             { name: 'keydown', fn: keydown },
             { name: 'keyup', fn: keyup },
-            { name: 'deviceorientation', fn: orientation }
+            { name: 'deviceorientation', fn: orientation },
+            { name: 'click', fn: click }
         ], [], initWorld);
 }
 
@@ -96,15 +106,23 @@ function keydown(e, world) {
     }
 }
 
+// Return, space
+var restartKeys = [13, 32];
 function keyup(e, world) {
     if (e.keyCode === 39) {
         world.keys.right = false;
     } else if (e.keyCode === 37) {
         world.keys.left = false;
+    } else if (restartKeys.indexOf(e.keyCode) !== -1) {
+        restart(world);
     }
 }
 
 function orientation(e, world) {
     world.gamma = e.gamma;
+}
+
+function click(e, world) {
+    restart(world);
 }
 
