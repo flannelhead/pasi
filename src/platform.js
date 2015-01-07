@@ -1,7 +1,7 @@
 function Platform(x, y) {
     this.x = x;
     this.y = y;
-    this.width = 20;
+    this.width = 25;
 }
 
 Platform.prototype.draw = function(ctx) {
