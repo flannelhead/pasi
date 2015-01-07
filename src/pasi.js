@@ -5,7 +5,7 @@ function Pasi(params) {
     this.speed = params.speed;
     this.jumpSpeed = params.jumpSpeed;
     this.nLeapTicks = params.nLeapTicks;
-    this.gammaFactor = params.gammaFactor;
+    this.tiltFactor = params.tiltFactor;
 
     this.yPrev = this.y;
     this.vx = 0;

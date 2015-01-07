@@ -28,7 +28,7 @@ function restart(world) {
         nLeapTicks: 3,
         speed: 4,
         jumpSpeed: 13,
-        gammaFactor: 0.4
+        tiltFactor: 0.6
     });
     // Give Pasi an initial kick.
     world.pasi.vy = -world.pasi.jumpSpeed;
@@ -76,7 +76,7 @@ function update(world) {
     } else if (world.keys.left) {
         world.pasi.vx = -world.pasi.speed;
     } else {
-        world.pasi.vx = world.pasi.gammaFactor * world.gamma;
+        world.pasi.vx = world.pasi.tiltFactor * world.gamma;
     }
     world.pasi.vy += world.g;
 
