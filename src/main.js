@@ -20,6 +20,9 @@ function initialWorld(width, height) {
             gammaFactor: 0.4
         }),
 
+        yCamera: 0,
+        cameraRatio: 0.3,
+
         platformGenerator: new PlatformGenerator(width, width / 2, -2)
     };
 }
@@ -46,7 +49,7 @@ function draw(ctx, world) {
     ctx.clearRect(0, 0, world.width, world.height);
 
     ctx.save();
-    ctx.translate(0, world.height);
+    ctx.translate(0, world.height - world.yCamera);
 
     world.platformGenerator.platforms.forEach(function(platform) {
         platform.draw(ctx);
@@ -58,8 +61,6 @@ function draw(ctx, world) {
 }
 
 function update(world) {
-    world.platformGenerator.generatePlatforms(0, -world.height);
-
     if (world.keys.right) {
         world.pasi.vx = world.pasi.speed;
     } else if (world.keys.left) {
@@ -71,6 +72,13 @@ function update(world) {
 
     world.pasi.update(world.g);
     world.pasi.wrap(world.width);
+
+    if (world.yCamera - world.pasi.y > world.cameraRatio * world.height) {
+        world.yCamera = world.pasi.y + world.cameraRatio * world.height;
+    }
+
+    world.platformGenerator.generatePlatforms(world.yCamera,
+        world.yCamera - world.height);
 
     var collidingPlatform =
         world.pasi.getCollidingPlatform(world.platformGenerator.platforms);
