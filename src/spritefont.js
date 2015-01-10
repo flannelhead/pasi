@@ -5,16 +5,17 @@ function SpriteFont(spritesheet, charmap, colour) {
 
     this.charSheet = document.createElement('canvas');
     var h = spritesheet.height, w = spritesheet.width;
-    canvas.width = w;
-    canvas.height = h;
-    this.ctx = canvas.getContext('2d');
+    this.charSheet.width = w;
+    this.charSheet.height = h;
+    this.ctx = this.charSheet.getContext('2d');
     this.ctx.drawImage(spritesheet, 0, 0);
     this.refData = this.ctx.getImageData(0, 0, w, h).data;
     this.recolour(colour);
 }
 
 SpriteFont.prototype.recolour = function(colour) {
-    var newImgData = ctx.createImageData(w, h),
+    var h = this.charSheet.height, w = this.charSheet.width;
+    var newImgData = this.ctx.createImageData(w, h),
         newData = newImgData.data;
 
     var i = 0;
