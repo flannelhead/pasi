@@ -37,10 +37,28 @@ function restart(world) {
         world.width / 2, -2);
 }
 
+function calculateGameDimensions(preferredHeight, minAspect, maxAspect) {
+    var vwWidth = window.innerWidth,
+        vwHeight = window.innerHeight;
+
+    var scale = Math.max(Math.floor(vwHeight / preferredHeight), 1),
+        actualHeight = Math.floor(vwHeight / scale);
+
+    var minWidth = Math.round(actualHeight * minAspect),
+        maxWidth = Math.round(actualHeight * maxAspect),
+        actualWidth = Math.min(Math.max(Math.floor(vwWidth / scale),
+            minWidth), maxWidth);
+
+    return {width: actualWidth, height: actualHeight};
+}
+
 function main() {
+    var dimensions = calculateGameDimensions(320, 9/16, 3/4);
+    console.log(dimensions.width);
+    console.log(dimensions.height);
     var config = {
-        width: 200,
-        height: 300,
+        width: dimensions.width,
+        height: dimensions.height,
         fps: 20
     };
 
