@@ -54,8 +54,6 @@ function calculateGameDimensions(preferredHeight, minAspect, maxAspect) {
 
 function main() {
     var dimensions = calculateGameDimensions(320, 9/16, 3/4);
-    console.log(dimensions.width);
-    console.log(dimensions.height);
     var config = {
         width: dimensions.width,
         height: dimensions.height,
