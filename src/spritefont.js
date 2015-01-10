@@ -18,15 +18,12 @@ SpriteFont.prototype.recolour = function(colour) {
     var newImgData = this.ctx.createImageData(w, h),
         newData = newImgData.data;
 
-    var i = 0;
-    for (var y = 0; y < h; ++y) {
-        for (var x = 0; x < w; ++x) {
-            if (this.refData[i + 3] > 0) {
-                newData[i] = colour.R;
-                newData[++i] = colour.G;
-                newData[++i] = colour.B;
-                newData[++i] = this.refData[i];
-            }
+    for (var i = 0, iMax = 4 * w * h; i < iMax; i += 4) {
+        if (this.refData[i + 3] > 0) {
+            newData[i] = colour.R;
+            newData[i + 1] = colour.G;
+            newData[i + 2] = colour.B;
+            newData[i + 3] = this.refData[i];
         }
     }
 
