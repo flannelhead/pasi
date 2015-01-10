@@ -10,6 +10,7 @@ function Pasi(params) {
     this.yPrev = this.y;
     this.vx = 0;
     this.vy = 0;
+    this.highest = 0;
     this.spriteIndex = 0;
     this.pose = 1;  // 1 = right, -1 = left
     this.leaping = false;
@@ -41,6 +42,7 @@ Pasi.prototype.update = function() {
     this.yPrev = this.y;
     this.x += this.vx;
     this.y += this.vy;
+    this.highest = Math.min(this.y, this.highest);
 };
 
 Pasi.prototype.wrap = function(width) {

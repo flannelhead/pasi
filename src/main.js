@@ -32,6 +32,8 @@ function restart(world) {
     // Give Pasi an initial kick.
     world.pasi.vy = -world.pasi.jumpSpeed;
     world.yCamera = 0;
+    world.score = 0;
+    world.penalty = 0;
     world.platformGenerator = new PlatformGenerator(world.width,
         world.width / 2, -2);
 }
@@ -99,6 +101,7 @@ function update(world) {
     world.pasi.wrap(world.width);
 
     if (world.yCamera - world.pasi.y > world.cameraRatio * world.height) {
+        var oldCamera = world.yCamera;
         world.yCamera = world.pasi.y + world.cameraRatio * world.height;
     }
 
@@ -110,7 +113,10 @@ function update(world) {
     if (collidingPlatform !== null) {
         world.pasi.y = collidingPlatform.y;
         world.pasi.leap();
+        world.penalty += 5;
     }
+
+    world.score = Math.round(-world.pasi.highest / 5) - world.penalty;
 }
 
 function keydown(e, world) {
