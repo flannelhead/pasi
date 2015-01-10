@@ -12,8 +12,7 @@ function initialWorld(width, height) {
 
         pasiSheet: sheet,
 
-        cameraRatio: 0.3,
-
+        cameraRatio: 0.3
     };
 
     restart(world);
