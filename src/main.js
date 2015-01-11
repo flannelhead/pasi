@@ -1,7 +1,6 @@
 window.addEventListener('load', main);
 
 function initialWorld(width, height) {
-    var sheet = new SpriteSheet(document.getElementById('pasi'), 4);
     var world = {
         keys: {left: false, right: false},
         gamma: 0,
@@ -10,7 +9,11 @@ function initialWorld(width, height) {
         height: height,
         g: 1,
 
-        pasiSheet: sheet,
+        resources: {
+            pasiSheet: new SpriteSheet(document.getElementById('pasi'), 4),
+            numbers: new SpriteFont(document.getElementById('numbers'),
+                '0123456789', {R: 255, G: 255, B: 255})
+        },
 
         cameraRatio: 0.3
     };
@@ -21,7 +24,7 @@ function initialWorld(width, height) {
 
 function restart(world) {
     world.pasi = new Pasi({
-        spriteSheet: world.pasiSheet,
+        spriteSheet: world.resources.pasiSheet,
         x: world.width / 2,
         y: 0,
         nLeapTicks: 3,
@@ -85,6 +88,9 @@ function draw(ctx, world) {
     world.pasi.draw(ctx);
 
     ctx.restore();
+
+    world.resources.numbers.drawText(ctx, world.width - 1, 2,
+        world.score.toString(), 'r');
 }
 
 function update(world) {
