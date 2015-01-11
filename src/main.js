@@ -122,7 +122,8 @@ function update(world) {
         world.penalty += 5;
     }
 
-    world.score = Math.round(-world.pasi.highest / 5) - world.penalty;
+    world.score = Math.max(Math.round(-world.pasi.highest / 5) - world.penalty,
+        0);
 }
 
 function keydown(e, world) {
