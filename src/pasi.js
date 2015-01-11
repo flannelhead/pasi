@@ -2,7 +2,8 @@ function Pasi(params) {
     this.sheet = params.spriteSheet;
     this.x = params.x;
     this.y = params.y;
-    this.speed = params.speed;
+    this.acceleration = params.acceleration;
+    this.damping = params.damping;
     this.jumpSpeed = params.jumpSpeed;
     this.nLeapTicks = params.nLeapTicks;
     this.tiltFactor = params.tiltFactor;

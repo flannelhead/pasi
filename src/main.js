@@ -28,7 +28,8 @@ function restart(world) {
         x: world.width / 2,
         y: 0,
         nLeapTicks: 3,
-        speed: 4,
+        acceleration: 1.5,
+        damping: 1,
         jumpSpeed: 13,
         tiltFactor: 0.6
     });
@@ -95,11 +96,17 @@ function draw(ctx, world) {
 
 function update(world) {
     if (world.keys.right) {
-        world.pasi.vx = world.pasi.speed;
+        world.pasi.vx += world.pasi.acceleration;
     } else if (world.keys.left) {
-        world.pasi.vx = -world.pasi.speed;
-    } else {
+        world.pasi.vx -= world.pasi.acceleration;
+    } else if (world.gamma !== 0) {
         world.pasi.vx = world.pasi.tiltFactor * world.gamma;
+    } else if (world.pasi.vx < 0) {
+        world.pasi.vx += world.pasi.damping;
+        if (world.pasi.vx > 0) world.pasi.vx = 0;
+    } else if (world.pasi.vx > 0) {
+        world.pasi.vx -= world.pasi.damping;
+        if (world.pasi.vx < 0) world.pasi.vx = 0;
     }
     world.pasi.vy += world.g;
 
