@@ -52,3 +52,12 @@ SpriteFont.prototype.drawText = function(ctx, x, y, text, anchor) {
     }
 };
 
+SpriteFont.prototype.drawLines = function(ctx, x, y, lines, anchor,
+    lineHeight) {
+    if (!lineHeight) lineHeight = 1;
+    for (var i = 0, nLines = lines.length; i < nLines; ++i) {
+        this.drawText(ctx, x, y, lines[i], anchor);
+        y += lineHeight * this.charHeight;
+    }
+};
+
