@@ -15,7 +15,8 @@ function initialWorld(width, height) {
                 '0123456789', {R: 255, G: 255, B: 255}),
             background: new ScrollingBackground(
                 document.getElementById('background'), width, height),
-            branchImg: document.getElementById('branch')
+            branchImg: new SpriteSheet(document.getElementById('branch'), 1,
+                true)
         },
 
         cameraRatio: 0.3,
