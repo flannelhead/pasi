@@ -30,8 +30,10 @@ Pasi.prototype.draw = function(ctx) {
 Pasi.prototype.update = function() {
     if (this.vx < 0) this.pose = -1;
     else if (this.vx > 0) this.pose = 1;
-    this.spriteIndex = this.pose === 1 ? 0 : 2;
-    if (this.vy >= 0) ++this.spriteIndex;
+
+    var goingUp = this.vy < 0;
+    if (this.pose === -1) this.spriteIndex = goingUp ? 3 : 2;
+    else this.spriteIndex = goingUp ? 0 : 1;
 
     this.yPrev = this.y;
     this.x += this.vx;

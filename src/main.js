@@ -10,7 +10,8 @@ function initialWorld(width, height) {
         g: 1,
 
         resources: {
-            pasiSheet: new SpriteSheet(document.getElementById('pasi'), 4),
+            pasiSheet: new SpriteSheet(document.getElementById('pasi'), 2,
+                true),
             numbers: new SpriteFont(document.getElementById('numbers'),
                 '0123456789', {R: 255, G: 255, B: 255}),
             background: new ScrollingBackground(
