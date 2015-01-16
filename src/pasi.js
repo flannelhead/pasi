@@ -5,7 +5,6 @@ function Pasi(params) {
     this.acceleration = params.acceleration;
     this.damping = params.damping;
     this.jumpSpeed = params.jumpSpeed;
-    this.nLeapTicks = params.nLeapTicks;
     this.tiltFactor = params.tiltFactor;
 
     this.yPrev = this.y;
@@ -24,7 +23,7 @@ function Pasi(params) {
 }
 
 Pasi.prototype.draw = function(ctx) {
-    this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y - this.height,
+    this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y - this.height + 3,
         this.spriteIndex);
 };
 
@@ -32,13 +31,7 @@ Pasi.prototype.update = function() {
     if (this.vx < 0) this.pose = -1;
     else if (this.vx > 0) this.pose = 1;
     this.spriteIndex = this.pose === 1 ? 0 : 2;
-
-    if (this.leaping) {
-        ++this.spriteIndex;
-        if (++this.leapCounter === this.nLeapTicks) {
-            this.leaping = false;
-        }
-    }
+    if (this.vy >= 0) ++this.spriteIndex;
 
     this.yPrev = this.y;
     this.x += this.vx;
@@ -71,10 +64,6 @@ Pasi.prototype.getCollidingPlatform = function(platforms) {
 };
 
 Pasi.prototype.leap = function() {
-    if (!this.leaping) {
-        this.leaping = true;
-        this.leapCounter = 0;
-        this.vy = -this.jumpSpeed;
-    }
+    this.vy = -this.jumpSpeed;
 };
 

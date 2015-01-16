@@ -27,7 +27,6 @@ function restart(world) {
         spriteSheet: world.resources.pasiSheet,
         x: world.width / 2,
         y: 0,
-        nLeapTicks: 3,
         acceleration: 1.5,
         damping: 1,
         jumpSpeed: 13,
