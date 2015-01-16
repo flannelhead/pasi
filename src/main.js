@@ -14,7 +14,8 @@ function initialWorld(width, height) {
             numbers: new SpriteFont(document.getElementById('numbers'),
                 '0123456789', {R: 255, G: 255, B: 255}),
             background: new ScrollingBackground(
-                document.getElementById('background'), width, height)
+                document.getElementById('background'), width, height),
+            branchImg: document.getElementById('branch')
         },
 
         cameraRatio: 0.3,
@@ -40,8 +41,8 @@ function restart(world) {
     world.yCamera = 0;
     world.score = 0;
     world.penalty = 0;
-    world.platformGenerator = new PlatformGenerator(world.width,
-        world.width / 2, -2);
+    world.platformGenerator = new PlatformGenerator(world.resources.branchImg,
+        world.width, world.width / 2, -2);
 }
 
 function calculateGameDimensions(preferredHeight, minAspect, maxAspect) {
