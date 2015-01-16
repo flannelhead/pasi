@@ -79,8 +79,6 @@ function main() {
 }
 
 function draw(ctx, world) {
-    ctx.clearRect(0, 0, world.width, world.height);
-
     world.resources.background.draw(ctx,
         Math.abs(world.scrollFactor * world.yCamera));
 
