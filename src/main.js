@@ -12,10 +12,13 @@ function initialWorld(width, height) {
         resources: {
             pasiSheet: new SpriteSheet(document.getElementById('pasi'), 4),
             numbers: new SpriteFont(document.getElementById('numbers'),
-                '0123456789', {R: 255, G: 255, B: 255})
+                '0123456789', {R: 255, G: 255, B: 255}),
+            background: new ScrollingBackground(
+                document.getElementById('background'), width, height)
         },
 
-        cameraRatio: 0.3
+        cameraRatio: 0.3,
+        scrollFactor: 0.5
     };
 
     restart(world);
@@ -77,6 +80,9 @@ function main() {
 
 function draw(ctx, world) {
     ctx.clearRect(0, 0, world.width, world.height);
+
+    world.resources.background.draw(ctx,
+        Math.abs(world.scrollFactor * world.yCamera));
 
     ctx.save();
     ctx.translate(0, world.height - world.yCamera);
