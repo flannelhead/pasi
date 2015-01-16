@@ -102,7 +102,7 @@ function update(world) {
         world.pasi.vx += world.pasi.acceleration;
     } else if (world.keys.left) {
         world.pasi.vx -= world.pasi.acceleration;
-    } else if (world.gamma !== 0) {
+    } else if (world.gamma) {
         world.pasi.vx = world.pasi.tiltFactor * world.gamma;
     } else if (world.pasi.vx < 0) {
         world.pasi.vx += world.pasi.damping;
