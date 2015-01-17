@@ -20,7 +20,7 @@ function Pasi(params) {
     this.baseDxLeft = -7;
     this.xOffset = -this.width / 2 - 4;
     this.height = this.sheet.spriteHeight;
-    this.poseThres = 2;
+    this.poseThres = 0.5;
 }
 
 Pasi.prototype.draw = function(ctx) {
