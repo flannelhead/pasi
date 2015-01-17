@@ -42,7 +42,7 @@ function restart(world) {
     world.pasi.vy = -world.pasi.jumpSpeed;
     world.yCamera = 0;
     world.score = 0;
-    world.penalty = 0;
+    world.scoreExtra = 0;
     world.platformGenerator = new PlatformGenerator(world.resources.branchImg,
         world.width, world.width / 2, -2);
 }
@@ -131,11 +131,10 @@ function update(world) {
     if (collidingPlatform !== null) {
         world.pasi.y = collidingPlatform.y;
         world.pasi.leap();
-        world.penalty += 5;
     }
 
-    world.score = Math.max(Math.round(-world.pasi.highest / 5) - world.penalty,
-        0);
+    world.score = Math.max(Math.round(-world.pasi.highest / 5) +
+        world.scoreExtra, 0);
 }
 
 function keydown(e, world) {
