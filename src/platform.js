@@ -1,7 +1,7 @@
 function Platform(sheet, x, y) {
     this.x = x;
     this.y = y;
-    this.width = 25;
+    this.width = 35;
     this.sheet = sheet;
     this.spriteIndex = Math.floor(2 * Math.random());
     this.imageWidth = sheet.spriteWidth;
