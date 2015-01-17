@@ -82,10 +82,10 @@ function main() {
 
 function draw(ctx, world) {
     world.resources.background.draw(ctx,
-        Math.abs(world.scrollFactor * world.yCamera));
+        Math.round(Math.abs(world.scrollFactor * world.yCamera)));
 
     ctx.save();
-    ctx.translate(0, world.height - world.yCamera);
+    ctx.translate(0, world.height - Math.round(world.yCamera));
 
     world.platformGenerator.platforms.forEach(function(platform) {
         platform.draw(ctx);

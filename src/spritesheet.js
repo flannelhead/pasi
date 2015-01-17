@@ -12,6 +12,7 @@ function SpriteSheet(image, nSprites, mirror) {
 
 SpriteSheet.prototype.drawSprite = function(ctx, x, y, index) {
     ctx.drawImage(this.image, index * this.spriteWidth, 0, this.spriteWidth,
-        this.spriteHeight, x, y, this.spriteWidth, this.spriteHeight);
+        this.spriteHeight, Math.round(x), Math.round(y),
+        this.spriteWidth, this.spriteHeight);
 };
 
