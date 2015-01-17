@@ -72,13 +72,12 @@ function main() {
 
     var initWorld = initialWorld(config.width, config.height);
 
-    startGame(document.getElementById('mainCanvas'), config, draw, update,
-        [
-            { name: 'keydown', fn: keydown },
-            { name: 'keyup', fn: keyup },
-            { name: 'deviceorientation', fn: orientation },
-            { name: 'click', fn: click }
-        ], [], initWorld);
+    startGame(document.getElementById('mainCanvas'), config, draw, update, [
+        { name: 'keydown', fn: keydown },
+        { name: 'keyup', fn: keyup },
+        { name: 'deviceorientation', fn: orientation },
+        { name: 'click', fn: click }
+    ], [], initWorld);
 }
 
 function draw(ctx, world) {
