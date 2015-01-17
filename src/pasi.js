@@ -13,7 +13,6 @@ function Pasi(params) {
     this.highest = 0;
     this.spriteIndex = 0;
     this.pose = 1;  // 1 = right, -1 = left
-    this.leaping = false;
     this.width = this.sheet.spriteWidth;
     this.baseWidth = 13;
     this.baseDxRight = 3;
@@ -66,7 +65,7 @@ Pasi.prototype.getCollidingPlatform = function(platforms) {
     return null;
 };
 
-Pasi.prototype.leap = function() {
+Pasi.prototype.jump = function() {
     this.vy = -this.jumpSpeed;
 };
 

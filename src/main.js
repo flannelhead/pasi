@@ -38,8 +38,7 @@ function restart(world) {
         jumpSpeed: 13,
         tiltFactor: 0.6
     });
-    // Give Pasi an initial kick.
-    world.pasi.vy = -world.pasi.jumpSpeed;
+    world.pasi.jump();
     world.yCamera = 0;
     world.score = 0;
     world.scoreExtra = 0;
@@ -130,7 +129,7 @@ function update(world) {
         world.pasi.getCollidingPlatform(world.platformGenerator.platforms);
     if (collidingPlatform !== null) {
         world.pasi.y = collidingPlatform.y;
-        world.pasi.leap();
+        world.pasi.jump();
     }
 
     world.score = Math.max(Math.round(-world.pasi.highest / 5) +
