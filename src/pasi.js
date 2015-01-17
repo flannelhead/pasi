@@ -20,6 +20,7 @@ function Pasi(params) {
     this.baseDxLeft = -7;
     this.xOffset = -this.width / 2 - 4;
     this.height = this.sheet.spriteHeight;
+    this.poseThres = 2;
 }
 
 Pasi.prototype.draw = function(ctx) {
@@ -28,8 +29,8 @@ Pasi.prototype.draw = function(ctx) {
 };
 
 Pasi.prototype.update = function() {
-    if (this.vx < 0) this.pose = -1;
-    else if (this.vx > 0) this.pose = 1;
+    if (this.vx < -1 * this.poseThres) this.pose = -1;
+    else if (this.vx > this.poseThres) this.pose = 1;
 
     var goingUp = this.vy < 0;
     if (this.pose === -1) this.spriteIndex = goingUp ? 3 : 2;
