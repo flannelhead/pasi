@@ -1,7 +1,7 @@
 function PlatformGenerator(branchSheet, width, xFirst, yFirst) {
     this.width = width;
 
-    this.xSpaceMin = 45;
+    this.xSpaceMin = branchSheet.spriteWidth;
     this.xSpaceRandom = 90;
     this.ySpaceMin = 10;
     this.ySpaceMax = 60;
@@ -22,13 +22,13 @@ PlatformGenerator.prototype.generatePlatforms = function(yLower, yUpper) {
         1), this.ySpaceMax - this.ySpaceMin);
     while (highestPlatform.y > yUpper) {
         var toss;
-        if (highestPlatform.x < this.xSpaceMin) toss = 1;
-        else if (highestPlatform.x > this.width - this.xSpaceMin) toss = -1;
+        if (highestPlatform.x < 2 * this.xSpaceMin) toss = 1;
+        else if (highestPlatform.x > this.width - 2 * this.xSpaceMin) toss = -1;
         else toss = Math.random() < 0.5 ? -1 : 1;
         var dx = toss * (this.xSpaceMin + this.xSpaceRandom * Math.random()),
             dy = this.ySpaceMin + ySpaceRandom * Math.random();
         var x = Math.min(Math.max(highestPlatform.x + dx,
-            0), this.width - highestPlatform.width);
+            0), this.width - this.xSpaceMin);
         highestPlatform = new Platform(this.branchSheet, Math.round(x),
             Math.round(highestPlatform.y - dy));
         newPlatforms.push(highestPlatform);

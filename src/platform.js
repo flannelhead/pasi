@@ -1,7 +1,6 @@
 function Platform(sheet, x, y) {
     this.x = x;
     this.y = y;
-    this.width = 35;
     this.sheet = sheet;
     this.mirrored = Math.random() > 0.5;
     this.imageWidth = sheet.spriteWidth;
