@@ -23,17 +23,14 @@ function Pasi(params) {
 }
 
 Pasi.prototype.draw = function(ctx) {
+    var spriteIndex = this.vy < 0 ? 0 : 1;
     this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y - this.height + 3,
-        this.spriteIndex);
+        this.spriteIndex, this.pose === -1);
 };
 
 Pasi.prototype.update = function() {
     if (this.vx < -1 * this.poseThres) this.pose = -1;
     else if (this.vx > this.poseThres) this.pose = 1;
-
-    var goingUp = this.vy < 0;
-    if (this.pose === -1) this.spriteIndex = goingUp ? 3 : 2;
-    else this.spriteIndex = goingUp ? 0 : 1;
 
     this.yPrev = this.y;
     this.x += this.vx;
