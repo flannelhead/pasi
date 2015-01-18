@@ -46,23 +46,41 @@ function restart(world) {
         world.width, world.width / 2, -2);
 }
 
-function calculateGameDimensions(preferredHeight, minAspect, maxAspect) {
-    var vwWidth = window.innerWidth,
-        vwHeight = window.innerHeight;
+function setupCanvas(preferredHeight, minAspect, maxAspect) {
+    var body = document.body;
+    var pixelRatio = window.devicePixelRatio || 1;
+    var cssWidth = body.offsetWidth,
+        cssHeight = body.offsetHeight,
+        physWidth = Math.floor(cssWidth * pixelRatio),
+        physHeight = Math.floor(cssHeight * pixelRatio);
 
-    var scale = Math.max(Math.floor(vwHeight / preferredHeight), 1),
-        actualHeight = Math.floor(vwHeight / scale);
+    var scale = Math.max(Math.floor(physHeight / preferredHeight), 1),
+        actualHeight = Math.floor(physHeight / scale);
 
     var minWidth = Math.round(actualHeight * minAspect),
         maxWidth = Math.round(actualHeight * maxAspect),
-        actualWidth = Math.min(Math.max(Math.floor(vwWidth / scale),
+        actualWidth = Math.min(Math.max(Math.floor(physWidth / scale),
             minWidth), maxWidth);
+
+    var canvas = document.getElementById('mainCanvas'),
+        ctx = canvas.getContext('2d');
+
+    canvas.width = actualWidth * scale;
+    canvas.height = actualHeight * scale;
+    canvas.style.width = canvas.width / pixelRatio + 'px';
+    canvas.style.height = canvas.height / pixelRatio + 'px';
+
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.msImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false;
+    ctx.scale(scale, scale);
 
     return {width: actualWidth, height: actualHeight};
 }
 
 function main() {
-    var dimensions = calculateGameDimensions(260, 9/16, 3/4);
+    var dimensions = setupCanvas(260, 9/16, 3/4);
     var config = {
         width: dimensions.width,
         height: dimensions.height,

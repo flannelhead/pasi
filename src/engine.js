@@ -26,8 +26,8 @@ function startGame(canvas, config, draw, update, globalHandlers,
 
         ctx.scale(scale, scale);
     }
-    setupCanvas();
-    window.addEventListener('resize', setupCanvas);
+    // setupCanvas();
+    // window.addEventListener('resize', setupCanvas);
 
     var world = initialWorld;
 

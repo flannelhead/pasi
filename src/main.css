@@ -12,11 +12,12 @@ body {
     background-color: #181818;
 }
 
-canvas {
-    background-color: #86C1B9;
-}
-
 #assets {
     display: none;
+}
+
+@-ms-viewport {
+    width: device-width;
+    height: device-height;
 }
 
