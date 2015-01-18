@@ -9,7 +9,15 @@ function Platform(sheet, x, y) {
 }
 
 Platform.prototype.draw = function(ctx) {
-    this.sheet.drawSprite(ctx, this.x - this.imageWidth / 2, this.y,
-        0, this.mirrored);
+    this.sheet.drawSprite(ctx, this.x, this.y, 0, this.mirrored);
+};
+
+Platform.prototype.getCollidingBox = function() {
+    return {
+        left: this.x + 1,
+        right: this.x + 37,
+        top: this.y,
+        bottom: this.y + 3
+    };
 };
 

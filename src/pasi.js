@@ -13,17 +13,13 @@ function Pasi(params) {
     this.highest = 0;
     this.pose = 1;  // 1 = right, -1 = left
     this.width = this.sheet.spriteWidth;
-    this.baseWidth = 13;
-    this.baseDxRight = 3;
-    this.baseDxLeft = -7;
-    this.xOffset = -this.width / 2 - 4;
     this.height = this.sheet.spriteHeight;
     this.poseThres = 0.5;
 }
 
 Pasi.prototype.draw = function(ctx) {
     var spriteIndex = this.vy < 0 ? 0 : 1;
-    this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y - this.height + 3,
+    this.sheet.drawSprite(ctx, this.x, this.y - this.height + 3,
         spriteIndex, this.pose === -1);
 };
 
@@ -47,14 +43,15 @@ Pasi.prototype.wrap = function(width) {
 };
 
 Pasi.prototype.getCollidingPlatform = function(platforms) {
-    var platform;
-    var baseX = this.pose === 1 ? this.x + this.baseDxRight :
-        this.x + this.baseDxLeft;
-    for (var i = 0; i < platforms.length; i++) {
+    var myCollBox = this.getCollidingBox();
+    var platform, platCollBox;
+    for (var i = platforms.length - 1; i >= 0; --i) {
         platform = platforms[i];
-        if (this.yPrev <= platform.y && this.y >= platform.y && this.vy > 0 &&
-            Math.abs(baseX - platform.x) <
-            (platform.width + this.baseWidth) / 2) {
+        platCollBox = platform.getCollidingBox();
+        if (myCollBox.left < platCollBox.right &&
+            myCollBox.right > platCollBox.left &&
+            this.yPrev <= platform.y &&
+            this.y >= platform.y) {
             return platform;
         }
     }
@@ -63,5 +60,21 @@ Pasi.prototype.getCollidingPlatform = function(platforms) {
 
 Pasi.prototype.jump = function() {
     this.vy = -this.jumpSpeed;
+};
+
+Pasi.prototype.getCollidingBox = function() {
+    var box = {
+        left: this.x + 4,
+        right: this.x + 20,
+        top: this.y - 28,
+        bottom: this.y
+    };
+
+    if (this.pose === -1) {
+        box.left = this.x + 2;
+        box.right = this.x + 18;
+    }
+
+    return box;
 };
 
