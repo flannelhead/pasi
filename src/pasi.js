@@ -25,7 +25,7 @@ function Pasi(params) {
 Pasi.prototype.draw = function(ctx) {
     var spriteIndex = this.vy < 0 ? 0 : 1;
     this.sheet.drawSprite(ctx, this.x + this.xOffset, this.y - this.height + 3,
-        this.spriteIndex, this.pose === -1);
+        spriteIndex, this.pose === -1);
 };
 
 Pasi.prototype.update = function() {
