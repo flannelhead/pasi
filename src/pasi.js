@@ -50,8 +50,8 @@ Pasi.prototype.getCollidingPlatform = function(platforms) {
         platCollBox = platform.getCollidingBox();
         if (myCollBox.left < platCollBox.right &&
             myCollBox.right > platCollBox.left &&
-            this.yPrev <= platform.y &&
-            this.y >= platform.y) {
+            this.yPrev <= platCollBox.top &&
+            this.y >= platCollBox.top) {
             return platform;
         }
     }
