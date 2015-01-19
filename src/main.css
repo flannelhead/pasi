@@ -16,6 +16,10 @@ body {
     display: none;
 }
 
+@viewport {
+    orientation: portrait;
+}
+
 @-ms-viewport {
     width: device-width;
     height: device-height;
