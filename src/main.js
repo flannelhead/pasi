@@ -47,10 +47,10 @@ function restart(world) {
 }
 
 function setupCanvas(preferredHeight, minAspect, maxAspect) {
-    var body = document.body;
+    var bodyCR = document.body.getBoundingClientRect();
     var pixelRatio = window.devicePixelRatio || 1;
-    var cssWidth = body.offsetWidth,
-        cssHeight = body.offsetHeight,
+    var cssWidth = bodyCR.right - bodyCR.left,
+        cssHeight = bodyCR.bottom - bodyCR.top,
         physWidth = Math.floor(cssWidth * pixelRatio),
         physHeight = Math.floor(cssHeight * pixelRatio);
 
