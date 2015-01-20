@@ -48,7 +48,7 @@ Pasi.prototype.getCollidingPlatform = function(platforms) {
         myCollBox = this.collidingBox;
     for (var i = platforms.length - 1; i >= 0; --i) {
         platform = platforms[i];
-        platCollBox = platform.getCollidingBox();
+        platCollBox = platform.collidingBox;
         if (myCollBox.left < platCollBox.right &&
             myCollBox.right > platCollBox.left &&
             this.prevCollidingBox.bottom <= platCollBox.top &&
