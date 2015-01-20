@@ -7,7 +7,6 @@ function Pasi(params) {
     this.jumpSpeed = params.jumpSpeed;
     this.tiltFactor = params.tiltFactor;
 
-    this.yPrev = this.y;
     this.vx = 0;
     this.vy = 0;
     this.highest = 0;
@@ -15,6 +14,8 @@ function Pasi(params) {
     this.width = this.sheet.spriteWidth;
     this.height = this.sheet.spriteHeight;
     this.poseThres = 0.5;
+    this.updateCollidingBox();
+    this.prevCollidingBox = this.collidingBox;
 }
 
 Pasi.prototype.draw = function(ctx) {
@@ -27,10 +28,10 @@ Pasi.prototype.update = function() {
     if (this.vx < -1 * this.poseThres) this.pose = -1;
     else if (this.vx > this.poseThres) this.pose = 1;
 
-    this.yPrev = this.y;
     this.x += this.vx;
     this.y += this.vy;
     this.highest = Math.min(this.y, this.highest);
+    this.updateCollidingBox();
 };
 
 Pasi.prototype.wrap = function(width) {
@@ -43,15 +44,15 @@ Pasi.prototype.wrap = function(width) {
 };
 
 Pasi.prototype.getCollidingPlatform = function(platforms) {
-    var myCollBox = this.getCollidingBox();
-    var platform, platCollBox;
+    var platform, platCollBox,
+        myCollBox = this.collidingBox;
     for (var i = platforms.length - 1; i >= 0; --i) {
         platform = platforms[i];
         platCollBox = platform.getCollidingBox();
         if (myCollBox.left < platCollBox.right &&
             myCollBox.right > platCollBox.left &&
-            this.yPrev <= platCollBox.top &&
-            this.y >= platCollBox.top) {
+            this.prevCollidingBox.bottom <= platCollBox.top &&
+            myCollBox.bottom >= platCollBox.top) {
             return platform;
         }
     }
@@ -62,7 +63,7 @@ Pasi.prototype.jump = function() {
     this.vy = -this.jumpSpeed;
 };
 
-Pasi.prototype.getCollidingBox = function() {
+Pasi.prototype.updateCollidingBox = function() {
     var box = {
         left: this.x + 4,
         right: this.x + 20,
@@ -75,6 +76,7 @@ Pasi.prototype.getCollidingBox = function() {
         box.right = this.x + 18;
     }
 
-    return box;
+    this.prevCollidingBox = this.collidingBox;
+    this.collidingBox = box;
 };
 
