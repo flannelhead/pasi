@@ -65,16 +65,23 @@ function setupCanvas(preferredHeight, minAspect, maxAspect) {
     var canvas = document.getElementById('mainCanvas'),
         ctx = canvas.getContext('2d');
 
-    canvas.width = actualWidth * scale;
-    canvas.height = actualHeight * scale;
-    canvas.style.width = canvas.width / pixelRatio + 'px';
-    canvas.style.height = canvas.height / pixelRatio + 'px';
-
-    ctx.webkitImageSmoothingEnabled = false;
-    ctx.msImageSmoothingEnabled = false;
-    ctx.mozImageSmoothingEnabled = false;
-    ctx.imageSmoothingEnabled = false;
-    ctx.scale(scale, scale);
+    var imageRendering = window.getComputedStyle(canvas).imageRendering;
+    if (imageRendering === "auto" || !imageRendering) {
+        canvas.width = actualWidth * scale;
+        canvas.height = actualHeight * scale;
+        canvas.style.width = canvas.width / pixelRatio + 'px';
+        canvas.style.height = canvas.height / pixelRatio + 'px';
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.msImageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.imageSmoothingEnabled = false;
+        ctx.scale(scale, scale);
+    } else {
+        canvas.width = actualWidth;
+        canvas.height = actualHeight;
+        canvas.style.width = actualWidth * scale / pixelRatio + 'px';
+        canvas.style.height = actualHeight * scale / pixelRatio + 'px';
+    }
 
     return {width: actualWidth, height: actualHeight};
 }

@@ -16,6 +16,15 @@ body {
     display: none;
 }
 
+#mainCanvas {
+    image-rendering: auto;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    /* image-rendering: -webkit-optimize-contrast; */
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
 @viewport {
     orientation: portrait;
 }
