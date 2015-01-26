@@ -15,7 +15,9 @@ function initialWorld(width, height) {
             numbers: new SpriteFont(document.getElementById('numbers'),
                 '0123456789', {R: 255, G: 255, B: 255}),
             background: new ScrollingBackground(
-                document.getElementById('background'), width, height),
+                BackgroundGenerator.generateBackground(width, height,
+                [['#0a4c08', '#0f5805'], ['#28641d', '#2a6b1d']]),
+                width, height),
             branchImg: new SpriteSheet(document.getElementById('branch'), 1,
                 true)
         },
